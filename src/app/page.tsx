@@ -4,7 +4,7 @@ import Section from "@/components/home/section";
 
 export default function Home() {
   return (
-    <div className="p-24">
+    <div className="p-8 lg:p-24">
       <Header />
       <div id="about" className="mt-32">
         <Section
