@@ -1,10 +1,13 @@
-import React from "react";
+"use client";
+
+import React, { useRef } from "react";
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { motion, useInView } from "framer-motion";
 
 const parseLinks = (text: string) => {
   const linkRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
@@ -28,6 +31,9 @@ const parseLinks = (text: string) => {
 };
 
 export default function FAQAccordion() {
+  const ref = useRef<HTMLDivElement | null>(null);
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
+
   const faqItems = [
     {
       question: "What is Tuning Thunder?",
@@ -47,7 +53,14 @@ export default function FAQAccordion() {
   ];
 
   return (
-    <section id="faq" className="w-full max-w-4xl mx-auto p-6">
+    <motion.section
+      ref={ref}
+      initial={{ y: 50, opacity: 0 }}
+      animate={isInView ? { y: 0, opacity: 1 } : {}}
+      transition={{ duration: 0.5 }}
+      id="faq"
+      className="w-full max-w-4xl mx-auto p-6"
+    >
       <h2 className="text-2xl text-center font-bold mb-6">
         Frequently Asked Questions
       </h2>
@@ -90,6 +103,6 @@ export default function FAQAccordion() {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-    </section>
+    </motion.section>
   );
 }
