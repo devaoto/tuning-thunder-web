@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/providers/theme-provider";
 import ProgressBar from "@/providers/progressbar-provider";
 import NavBar from "@/components/base/navbar";
+import Footer from "@/components/base/footer";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -40,7 +41,8 @@ export default function RootLayout({
         >
           <ProgressBar>
             <NavBar />
-            {children}
+            <main>{children}</main>
+            <Footer />
           </ProgressBar>
         </ThemeProvider>
       </body>
