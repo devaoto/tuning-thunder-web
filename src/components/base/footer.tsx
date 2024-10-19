@@ -10,7 +10,7 @@ export default function Footer() {
               <span className="text-primary">Tune</span>Music
             </h2>
             <p className="text-sm text-muted-foreground">
-              Bringing harmony to your world, one note at a time.
+             The Ultimate Music Bot for Your Discord Server.
             </p>
           </div>
           <div>
