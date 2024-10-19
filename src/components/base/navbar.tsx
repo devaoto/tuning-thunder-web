@@ -32,21 +32,21 @@ export default function NavBar() {
   const navItems = ["Commands", "Premium", "Policy"];
 
   const NavItems = ({ mobile = false }) => (
-    <ul className={`flex ${mobile ? "flex-col space-y-4" : "space-x-6"}`}>
+    <div className={`flex ${mobile ? "flex-col space-y-4" : "space-x-6"}`}>
       {navItems.map((item) => (
-        <motion.li
+        <motion.a
+          href={`/${item.toLowerCase()}`}
           key={item}
           className="relative cursor-pointer hover:text-primary"
         >
-          <Link
-            href={`/${item.toLowerCase()}`}
+          <div
             className="text-foreground transition-colors duration-200"
             onMouseEnter={() => setHovered(item)}
             onMouseLeave={() => setHovered(null)}
             onClick={() => mobile && setIsOpen(false)}
           >
             {item}
-          </Link>
+          </div>
           {!mobile && hovered === item && (
             <motion.div
               className="absolute inset-0 bg-primary/20 rounded-md filter blur-md"
@@ -57,9 +57,9 @@ export default function NavBar() {
               transition={{ duration: 0.2 }}
             />
           )}
-        </motion.li>
+        </motion.a>
       ))}
-    </ul>
+    </div>
   );
 
   return (
