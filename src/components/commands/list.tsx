@@ -5,6 +5,7 @@ import { Separator } from "@/components/ui/separator";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import { motion } from "framer-motion";
 
 export type Command = {
   name: string;
@@ -24,15 +25,21 @@ export default function CommandsList({
 
   const CommandList = ({ commands }: { commands: Command[] }) => (
     <ul className="space-y-2">
-      {commands.map((command) => (
-        <li key={command.name} className="flex items-start">
+      {commands.map((command, index) => (
+        <motion.li
+          key={command.name}
+          className="flex items-start"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.3, delay: index * 0.1 }}
+        >
           <span className="font-mono text-xs sm:text-sm bg-primary/10 text-primary px-1 py-0.5 sm:px-2 sm:py-1 rounded mr-2">
             /{command.name}
           </span>
           <span className="text-xs sm:text-sm text-muted-foreground">
             {command.description}
           </span>
-        </li>
+        </motion.li>
       ))}
     </ul>
   );
@@ -76,8 +83,21 @@ export default function CommandsList({
     </nav>
   );
 
+  const pageVariants = {
+    initial: { opacity: 0, y: 20 },
+    animate: { opacity: 1, y: 0 },
+    exit: { opacity: 0, y: -20 },
+  };
+
   return (
-    <div className="flex flex-col h-screen">
+    <motion.div
+      className="flex flex-col h-screen"
+      initial="initial"
+      animate="animate"
+      exit="exit"
+      variants={pageVariants}
+      transition={{ duration: 0.5 }}
+    >
       <header className="border-b p-4 flex justify-between items-center md:hidden">
         <h1 className="text-xl font-bold">Bot Commands</h1>
         <Sheet>
@@ -102,31 +122,51 @@ export default function CommandsList({
         </aside>
         <main className="flex-1 p-4 sm:p-6">
           <ScrollArea className="h-full">
-            <div className="space-y-6">
-              <section id="general">
+            <motion.div
+              className="space-y-6"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.5, delay: 0.2 }}
+            >
+              <motion.section
+                id="general"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+              >
                 <h2 className="text-xl sm:text-2xl font-bold mb-4">
                   General Commands
                 </h2>
                 <CommandList commands={generalCommands} />
-              </section>
+              </motion.section>
               <Separator />
-              <section id="music">
+              <motion.section
+                id="music"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+              >
                 <h2 className="text-xl sm:text-2xl font-bold mb-4">
                   Music Commands
                 </h2>
                 <CommandList commands={musicCommands} />
-              </section>
+              </motion.section>
               <Separator />
-              <section id="filter">
+              <motion.section
+                id="filter"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.5 }}
+              >
                 <h2 className="text-xl sm:text-2xl font-bold mb-4">
                   Filter Commands
                 </h2>
                 <CommandList commands={filterCommands} />
-              </section>
-            </div>
+              </motion.section>
+            </motion.div>
           </ScrollArea>
         </main>
       </div>
-    </div>
+    </motion.div>
   );
 }
