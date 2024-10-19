@@ -1,3 +1,4 @@
+import FAQAccordion from "@/components/home/faq";
 import Header from "@/components/home/header";
 import Section from "@/components/home/section";
 
@@ -5,7 +6,7 @@ export default function Home() {
   return (
     <div className="p-24">
       <Header />
-      <div className="mt-32">
+      <div id="about" className="mt-32">
         <Section
           label="About Tuning Thunder"
           description="Tuning Thunder is a powerful and versatile music bot for Discord. It allows you to play music from various sources, manage playlists, and interact with your server members in a fun and engaging way. Whether you're hosting a party or just chilling with friends, Tuning Thunder is here to provide the soundtrack."
@@ -43,6 +44,9 @@ export default function Home() {
           contentPosition="left"
           image="/speed.png"
         />
+      </div>
+      <div className="mt-52">
+        <FAQAccordion />
       </div>
     </div>
   );
